@@ -1,17 +1,220 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<!DOCTYPE html>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+<html lang="en" class="light">
+<!-- BEGIN: Head -->
+
+<head>
+    <meta charset="utf-8">
+    <link href="dist/images/logo.svg" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Enigma admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, Enigma Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+    <title>Inicio</title>
+    <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="dist/css/app.css"/>
+    <!-- END: CSS Assets-->
+</head>
+<!-- END: Head -->
+
+<body class="py-5 md:py-0">
+    <!-- BEGIN: Mobile Menu -->
+    <div class="mobile-menu md:hidden">
+        <div class="mobile-menu-bar">
+            <a href="" class="flex mr-auto">
+                <img alt="Midone - HTML Admin Template" class="w-12" src="/dist/images/logo-mybrand.svg">
+            </a>
+            <a href="javascript:;" class="mobile-menu-toggler"><i data-lucide="bar-chart-2"
+                class="w-8 h-8 text-white transform -rotate-90"></i>
+            </a>
+        </div>
+        <div class="scrollable">
+            <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="x-circle"
+                    class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+            <ul class="scrollable__content py-2">
+                <li>
+                    <a href="/dashboard" class="menu menu--active">
+                        <div class="menu__icon"><i data-lucide="home"></i></div>
+                        <div class="menu__title">Principal</div>
+                    </a>
+                </li>
+                <li class="menu__devider my-6"></li>
+                <li>
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"><i data-lucide="edit"></i></div>
+                        <div class="menu__title">Registros<i data-lucide="chevron-down" class="menu__sub-icon "></i></div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="" class="menu">
+                                <div class="menu__icon"><i class="fas fa-comment"></i></div>
+                                <div class="menu__title">Empresas</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="menu">
+                                <div class="menu__icon"><i class="fas fa-comment"></i></div>
+                                <div class="menu__title">Encuestas</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu__devider my-6"></li>
+                <li>
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"><i data-lucide="hard-drive"></i></div>
+                        <div class="menu__title">Funciones Avanzadas<i data-lucide="chevron-down" class="menu__sub-icon "></i>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="" class="menu">
+                                <div class="menu__icon"><i class="fas fa-users"></i></div>
+                                <div class="menu__title">Usuarios</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="menu">
+                                <div class="menu__icon"><i class="fas fa-user-lock"></i></div>
+                                <div class="menu__title">Roles</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
-</x-app-layout>
+    <!-- END: Mobile Menu -->
+    <!-- BEGIN: Top Bar -->
+    <div
+        class="top-bar-boxed h-[70px] md:h-[65px] z-[51] border-b border-white/[0.08] mt-12 md:mt-0 -mx-3 sm:-mx-8 md:-mx-0 px-3 md:border-b-0 relative md:fixed md:inset-x-0 md:top-0 sm:px-8 md:px-10 md:pt-10 md:bg-gradient-to-b md:from-slate-100 md:to-transparent">
+        <div class="h-full flex items-center">
+
+            <!-- BEGIN: Logo -->
+            <a href="" class="logo -intro-x hidden md:flex xl:w-[180px] block">
+                <img alt="Midone - HTML Admin Template" class="logo__image w-20" src="/dist/images/logo-mybrand.svg">
+            </a>
+            <!-- END: Logo -->
+
+            <!-- BEGIN: Breadcrumb -->
+            <nav aria-label="breadcrumb" class="-intro-x h-[45px] mr-auto">
+                <ol class="breadcrumb breadcrumb-light">
+                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                </ol>
+            </nav>
+            <!-- END: Breadcrumb -->
+            
+            <!-- BEGIN: Account Menu -->
+            <div class="intro-x dropdown w-8 h-8">
+                <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110"
+                    role="button" aria-expanded="false" data-tw-toggle="dropdown">
+                    <img alt="/dist/images/profile.png">
+                </div>
+                <div class="dropdown-menu w-56">
+                    <ul
+                        class="dropdown-content bg-primary/80 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white">
+                        <li class="p-2">
+                            <div class="font-medium">{{ Auth::user()->name }}</div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider border-white/[0.08]">
+                        </li>
+                        <li>
+                            <a href="{{ route('profile.edit') }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user"
+                                    class="w-4 h-4 mr-2"></i> Profile </a>
+                        </li>
+
+                        <!-- problemas con el icono y el metodo y el logout -->
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a href="{{ route('logout') }}" class="dropdown-item"  onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                                    <i data-lucide="toggle-right" class="w-4 h-6 mr-3"></i>
+                                    <span>{{ __('Cerrar sesión') }}</span>
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END: Account Menu -->
+        </div>
+    </div>
+    <!-- END: Top Bar -->
+
+
+    <!-- incio del dashboard  -->
+    <div class="flex overflow-hidden">
+        <!-- BEGIN: Side Menu -->
+        <nav class="side-nav">
+            <ul>
+                <li>
+                    <a href="/dashboard" class="side-menu side-menu--active">
+                        <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
+                        <div class="side-menu__title">Principal</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"><i data-lucide="edit"></i></div>
+                        <div class="side-menu__title">Registros
+                            <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li style="margin-left: 5px;">
+                            <a href="" class="side-menu">
+                                <div class="side-menu__icon"><i class="fas fa-comment"></i></div>
+                                <div class="side-menu__title">Empresas</div>
+                            </a>
+                        </li>
+                        <li style="margin-left: 5px;">
+                            <a href="" class="side-menu">
+                                <div class="side-menu__icon"><i class="fas fa-comment"></i></div>
+                                <div class="side-menu__title">Encuestas</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"><i data-lucide="hard-drive"></i></div>
+                        <div class="side-menu__title">Funciones Avanzadas
+                            <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li style="margin-left: 5px;">
+                            <a href="" class="side-menu">
+                                <div class="side-menu__icon"><i class="fas fa-users"></i></div>
+                                <div class="side-menu__title">Usuarios</div>
+                            </a>
+                        </li>
+                        <li style="margin-left: 5px;">
+                            <a href="" class="side-menu">
+                                <div class="side-menu__icon"><i class="fas fa-user-lock"></i></div>
+                                <div class="side-menu__title">Roles</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+        </nav>
+        <!-- END: Side Menu -->
+        <!-- BEGIN: Content -->
+        <div class="content">
+            <div class="content">
+            </div>
+        </div>
+        <!-- END: Content -->
+    </div>
+
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries=places"></script>
+    <script src="/dist/js/app.js"></script>
+    <!-- END: JS Assets-->
+</body>
+</html>
