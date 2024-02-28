@@ -1,0 +1,28 @@
+/* Estilos de carrusel */
+.carousel-cards-wrapper {
+    display: flex;
+    justify-content: center;
+}
+.carousel-card img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.carousel-inner {
+    padding: 1em;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: #808080;
+    width: 6.5vh;
+    height: 6.5vh;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+@media (min-width: 768px) {
+    .carousel-card img {
+        height: 9em;
+    }
+}

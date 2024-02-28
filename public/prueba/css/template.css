@@ -1,0 +1,96 @@
+    .search-input {
+        padding-left: 40px;
+        background-color: #eaedef;
+        background-image: url('/dist/images/search.png');
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        background-size: 20px 20px;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 3px;
+    }
+
+    .left-sidebar {
+        background-color: #eaedef;
+        width: 260px;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        display: block;
+        transition: 0.3s;
+        overflow-y: auto;
+    }
+
+    .right-sidebar {
+        background-color: #eaedef;
+        width: 330px;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        display: block;
+        transition: 0.3s;
+        overflow-y: auto;
+    }
+
+    .left-sidebar {
+        left: 0;
+    }
+
+    .right-sidebar {
+        right: 0;
+    }
+
+    .sidebar-content {
+        padding: 20px;
+    }
+
+    section {
+        margin-left: 280px;
+        margin-right: 280px;
+        padding: 20px;
+    }
+
+    /* Estilos para la lista personalizada */
+    .custom-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .custom-list li {
+        margin-bottom: 10px;
+        position: relative;
+        transition: background-color 0.3s;
+        border-radius: 5px;
+    }
+
+    .custom-list li:hover {
+        background-color: #f5f5f5;
+    }
+
+
+    .custom-list li a {
+        display: block;
+        padding: 5px 20px;
+        color: #333;
+        text-decoration: none;
+    }
+
+    .custom-list li a i {
+        margin-right: 10px;
+        color: #007763;
+    }
+
+    .custom-list li a:hover {
+        background-color: #007763;
+        color: #fff;
+        border-radius: 8px;
+    }
+
+    .custom-list li a:hover i {
+        color: #fff;
+    }
