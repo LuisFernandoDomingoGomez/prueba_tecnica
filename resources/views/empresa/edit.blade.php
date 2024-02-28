@@ -12,9 +12,9 @@
     <meta name="keywords"
         content="admin template, Enigma Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
-    <title>Inicio</title>
+    <title>Empresas | Edición</title>
     <!-- BEGIN: CSS Assets-->
-    <link rel="stylesheet" href="dist/css/app.css"/>
+    <link rel="stylesheet" href="/dist/css/app.css"/>
     <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
@@ -48,37 +48,15 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('empresas.index') }}" class="menu">
+                                <div class="menu__icon"><i class="fas fa-graduation-cap"></i></div>
                                 <div class="menu__title">Empresas</div>
                             </a>
                         </li>
                         <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('encuestas.index') }}" class="menu">
+                                <div class="menu__icon"><i class="fas fa-book-open"></i></div>
                                 <div class="menu__title">Encuestas</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu__devider my-6"></li>
-                <li>
-                    <a href="javascript:;" class="menu">
-                        <div class="menu__icon"><i data-lucide="hard-drive"></i></div>
-                        <div class="menu__title">Funciones Avanzadas<i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-users"></i></div>
-                                <div class="menu__title">Usuarios</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-user-lock"></i></div>
-                                <div class="menu__title">Roles</div>
                             </a>
                         </li>
                     </ul>
@@ -101,7 +79,9 @@
             <!-- BEGIN: Breadcrumb -->
             <nav aria-label="breadcrumb" class="-intro-x h-[45px] mr-auto">
                 <ol class="breadcrumb breadcrumb-light">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="#">Administracion</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('empresas.index') }}">Empresas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edición</li>
                 </ol>
             </nav>
             <!-- END: Breadcrumb -->
@@ -110,7 +90,7 @@
             <div class="intro-x dropdown w-8 h-8">
                 <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110"
                     role="button" aria-expanded="false" data-tw-toggle="dropdown">
-                    <img alt="/dist/images/profile.png">
+                    <img alt="{{ Auth::user()->name }} Avatar" src="{{ asset('avatars/' . Auth::user()->avatar) }}">
                 </div>
                 <div class="dropdown-menu w-56">
                     <ul
@@ -167,36 +147,14 @@
                     <ul class="">
                         <li style="margin-left: 5px;">
                             <a href="{{ route('empresas.index') }}" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-comment"></i></div>
-                                <div class="side-menu__title">Empresas</div>
+                                <div class="side-menu__icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="side-menu__title">empresas</div>
                             </a>
                         </li>
                         <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('encuestas.index') }}" class="side-menu">
+                                <div class="side-menu__icon"><i class="fas fa-book-open"></i></div>
                                 <div class="side-menu__title">Encuestas</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"><i data-lucide="hard-drive"></i></div>
-                        <div class="side-menu__title">Funciones Avanzadas
-                            <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-users"></i></div>
-                                <div class="side-menu__title">Usuarios</div>
-                            </a>
-                        </li>
-                        <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-user-lock"></i></div>
-                                <div class="side-menu__title">Roles</div>
                             </a>
                         </li>
                     </ul>
@@ -206,6 +164,31 @@
         <!-- BEGIN: Content -->
         <div class="content">
             <div class="content">
+                <div class="intro-y flex flex-col sm:flex-row items-center mt-1">
+                    <h2 class="text-lg font-medium mr-auto">
+                        Edición de Empresa
+                    </h2>
+                </div>
+                <div class="intro-y box p-5 mt-5">
+                    <div class="overflow-x-auto scrollbar-hidden">
+                        <div class="overflow-x-auto">
+                            <div class="intro-y box py-5 sm:py-5">
+                                @if ($errors->any())
+                                <div class="alert alert-outline-danger alert-dismissible show flex items-center mb-2" role="alert">
+                                        <i data-lucide="alert-octagon" class="w-6 h-6 mr-2"></i>
+                                        <strong>¡Revise los campos!</strong>
+                                        <span class="badge badge-danger"></span>
+                                </div>
+                                @endif
+                                <form method="POST" action="{{ route('empresas.update', $empresa->id) }}"  role="form" enctype="multipart/form-data">
+                                    {{ method_field('PATCH') }}
+                                    @csrf
+                                    @include('empresa.form')
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END: Content -->

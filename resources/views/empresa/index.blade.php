@@ -12,7 +12,7 @@
     <meta name="keywords"
         content="admin template, Enigma Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
-    <title>Inicio</title>
+    <title>Empresas | Inicio</title>
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="dist/css/app.css"/>
     <!-- END: CSS Assets-->
@@ -48,37 +48,15 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('empresas.index') }}" class="menu">
+                                <div class="menu__icon"><i class="fas fa-graduation-cap"></i></div>
                                 <div class="menu__title">Empresas</div>
                             </a>
                         </li>
                         <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('encuestas.index') }}" class="menu">
+                                <div class="menu__icon"><i class="fas fa-book-open"></i></div>
                                 <div class="menu__title">Encuestas</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu__devider my-6"></li>
-                <li>
-                    <a href="javascript:;" class="menu">
-                        <div class="menu__icon"><i data-lucide="hard-drive"></i></div>
-                        <div class="menu__title">Funciones Avanzadas<i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-users"></i></div>
-                                <div class="menu__title">Usuarios</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-user-lock"></i></div>
-                                <div class="menu__title">Roles</div>
                             </a>
                         </li>
                     </ul>
@@ -101,7 +79,8 @@
             <!-- BEGIN: Breadcrumb -->
             <nav aria-label="breadcrumb" class="-intro-x h-[45px] mr-auto">
                 <ol class="breadcrumb breadcrumb-light">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="#">Administracion</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Empresas</li>
                 </ol>
             </nav>
             <!-- END: Breadcrumb -->
@@ -110,7 +89,7 @@
             <div class="intro-x dropdown w-8 h-8">
                 <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110"
                     role="button" aria-expanded="false" data-tw-toggle="dropdown">
-                    <img alt="/dist/images/profile.png">
+                    <img alt="{{ Auth::user()->name }} Avatar" src="{{ asset('avatars/' . Auth::user()->avatar) }}">
                 </div>
                 <div class="dropdown-menu w-56">
                     <ul
@@ -167,36 +146,14 @@
                     <ul class="">
                         <li style="margin-left: 5px;">
                             <a href="{{ route('empresas.index') }}" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-comment"></i></div>
+                                <div class="side-menu__icon"><i class="fas fa-graduation-cap"></i></div>
                                 <div class="side-menu__title">Empresas</div>
                             </a>
                         </li>
                         <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('encuestas.index') }}" class="side-menu">
+                                <div class="side-menu__icon"><i class="fas fa-book-open"></i></div>
                                 <div class="side-menu__title">Encuestas</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"><i data-lucide="hard-drive"></i></div>
-                        <div class="side-menu__title">Funciones Avanzadas
-                            <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-users"></i></div>
-                                <div class="side-menu__title">Usuarios</div>
-                            </a>
-                        </li>
-                        <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-user-lock"></i></div>
-                                <div class="side-menu__title">Roles</div>
                             </a>
                         </li>
                     </ul>
@@ -206,6 +163,88 @@
         <!-- BEGIN: Content -->
         <div class="content">
             <div class="content">
+                <div class="intro-y flex flex-col sm:flex-row items-center">
+                    <h2 class="text-lg font-medium mr-auto">
+                        Gestión de Empresas
+                    </h2>
+
+                    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+                        <a class="btn btn-primary shadow-md mr-2" href="{{ route('empresas.create') }}">Agregar</a>
+                        <div class="dropdown ml-auto sm:ml-0">
+                            <button class="dropdown-toggle btn px-2 box" aria-expanded="false"
+                                data-tw-toggle="dropdown">
+                                <span class="w-5 h-5 flex items-center justify-center"><i
+                                    class="w-4 h-4" data-lucide="plus"></i></span>
+                            </button>
+                            <div class="dropdown-menu w-40">
+                                <ul class="dropdown-content">
+                                    <li>
+                                        <a href="{{ route('empresas.create') }}" class="dropdown-item"> <i data-lucide="empresas" class="w-14 h-14 mr-2"></i> Agregar Empresa </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y box p-5 mt-5">
+                    @if ($message = Session::get('success'))
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                        <script>
+                            Swal.fire({
+                                title: 'Éxito',
+                                text: "{{ session('success') }}",
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            });
+                        </script>
+                    @endif
+                    <div class="overflow-x-auto scrollbar-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="table mt-5">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="whitespace-nowrap">No.</th>
+                                        <th class="whitespace-nowrap">Nombre</th>
+                                        <th class="whitespace-nowrap " align="center">Acciones </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $i = ($empresas->currentPage() - 1) * $empresas->perPage() + 1;
+                                    @endphp
+                                    @foreach ($empresas as $empresa )
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $empresa->name }}</td>
+                                        <td class="table-report__action w-56">
+                                            <div class="flex justify-center items-center">
+                                                <a class="flex items-center mr-3" href="{{ route('empresas.edit', $empresa->id) }}">
+                                                    <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
+                                                </a>
+                                                <form action="{{ route('empresas.destroy', $empresa->id) }}" method="POST" class="formEliminar">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="flex items-center text-danger">
+                                                        <i data-lucide="trash-2" class="w-5 h-10 mr-1"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Paginacion -->
+                    <div class="card-footer py-4">
+                        <nav class="d-flex justify-content-end" aria-label="...">
+                            {!! $empresas->links() !!}
+                        </nav>
+                    </div>
+
+                </div>
             </div>
         </div>
         <!-- END: Content -->
@@ -218,3 +257,31 @@
     <!-- END: JS Assets-->
 </body>
 </html>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    (function() {
+        'use strict'
+        var forms = document.querySelectorAll('.formEliminar')
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    Swal.fire({
+                        title: '¿Deseas eliminar la empresa?',
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#20c997',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Confirmar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                            Swal.fire('¡Eliminado!',
+                                'El registro ha sido eliminado exitosamente.', 'success');
+                        }
+                    })
+                }, false)
+            })
+    })()
+</script>

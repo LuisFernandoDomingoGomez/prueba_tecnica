@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('empresas', App\Http\Controllers\EmpresaController::class);
+	Route::resource('encuestas', App\Http\Controllers\EncuestaController::class);
 });
 
 require __DIR__.'/auth.php';

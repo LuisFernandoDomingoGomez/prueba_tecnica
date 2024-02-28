@@ -12,9 +12,18 @@
     <meta name="keywords"
         content="admin template, Enigma Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
-    <title>Inicio</title>
+    <title>Encuestas | Detalles</title>
     <!-- BEGIN: CSS Assets-->
-    <link rel="stylesheet" href="dist/css/app.css"/>
+    <link rel="stylesheet" href="/dist/css/app.css"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
     <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
@@ -48,37 +57,15 @@
                     </a>
                     <ul class="">
                         <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('empresas.index') }}" class="menu">
+                                <div class="menu__icon"><i class="fas fa-graduation-cap"></i></div>
                                 <div class="menu__title">Empresas</div>
                             </a>
                         </li>
                         <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('encuestas.index') }}" class="menu">
+                                <div class="menu__icon"><i class="fas fa-book-open"></i></div>
                                 <div class="menu__title">Encuestas</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu__devider my-6"></li>
-                <li>
-                    <a href="javascript:;" class="menu">
-                        <div class="menu__icon"><i data-lucide="hard-drive"></i></div>
-                        <div class="menu__title">Funciones Avanzadas<i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-users"></i></div>
-                                <div class="menu__title">Usuarios</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" class="menu">
-                                <div class="menu__icon"><i class="fas fa-user-lock"></i></div>
-                                <div class="menu__title">Roles</div>
                             </a>
                         </li>
                     </ul>
@@ -101,7 +88,9 @@
             <!-- BEGIN: Breadcrumb -->
             <nav aria-label="breadcrumb" class="-intro-x h-[45px] mr-auto">
                 <ol class="breadcrumb breadcrumb-light">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="#">Administracion</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('encuestas.index') }}">Encuestas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Creación</li>
                 </ol>
             </nav>
             <!-- END: Breadcrumb -->
@@ -110,7 +99,7 @@
             <div class="intro-x dropdown w-8 h-8">
                 <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110"
                     role="button" aria-expanded="false" data-tw-toggle="dropdown">
-                    <img alt="/dist/images/profile.png">
+                    <img alt="{{ Auth::user()->name }} Avatar" src="{{ asset('avatars/' . Auth::user()->avatar) }}">
                 </div>
                 <div class="dropdown-menu w-56">
                     <ul
@@ -167,36 +156,14 @@
                     <ul class="">
                         <li style="margin-left: 5px;">
                             <a href="{{ route('empresas.index') }}" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-comment"></i></div>
+                                <div class="side-menu__icon"><i class="fas fa-graduation-cap"></i></div>
                                 <div class="side-menu__title">Empresas</div>
                             </a>
                         </li>
                         <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-comment"></i></div>
+                            <a href="{{ route('encuestas.index') }}" class="side-menu">
+                                <div class="side-menu__icon"><i class="fas fa-book-open"></i></div>
                                 <div class="side-menu__title">Encuestas</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"><i data-lucide="hard-drive"></i></div>
-                        <div class="side-menu__title">Funciones Avanzadas
-                            <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-users"></i></div>
-                                <div class="side-menu__title">Usuarios</div>
-                            </a>
-                        </li>
-                        <li style="margin-left: 5px;">
-                            <a href="" class="side-menu">
-                                <div class="side-menu__icon"><i class="fas fa-user-lock"></i></div>
-                                <div class="side-menu__title">Roles</div>
                             </a>
                         </li>
                     </ul>
@@ -206,6 +173,33 @@
         <!-- BEGIN: Content -->
         <div class="content">
             <div class="content">
+                <div class="intro-y flex flex-col sm:flex-row items-center mt-1">
+                    <h2 class="text-lg font-medium mr-auto">
+                        Encuesta
+                    </h2>
+                    <div class="float-right">
+                        <a class="btn btn-primary" href="{{ route('encuestas.index') }}"> Atrás</a>
+                    </div>
+                </div>
+                <div class="intro-y box p-5 mt-5">
+                    <div class="overflow-x-auto scrollbar-hidden">
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><strong>Usuario:</strong> {{ $encuesta->user->name }}</li>
+                                        <li class="list-group-item"><strong>Empresa:</strong> {{ $encuesta->empresa->name }}</li>
+                                        <li class="list-group-item"><strong>Fecha:</strong> {{ $encuesta->created_at->format('Y-m-d') }}</li>
+                                        <li class="list-group-item"><strong>Hora:</strong> {{ $encuesta->created_at->toTimeString() }}</li>
+                                        <li class="list-group-item"><strong>Latitud:</strong> {{ $encuesta->latitud }}</li>
+                                        <li class="list-group-item"><strong>Longitud:</strong> {{ $encuesta->longitud }}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="map" style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
         <!-- END: Content -->
@@ -218,3 +212,23 @@
     <!-- END: JS Assets-->
 </body>
 </html>
+
+@section('scripts')
+    @parent
+    <!-- Incluye Leaflet.js -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // Crea un mapa Leaflet en el contenedor con el ID 'map'
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        // Agrega una capa de mosaico (tile layer) de OpenStreetMap al mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Agrega un marcador en una ubicación específica
+        L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('Ubicación del usuario')
+            .openPopup();
+    </script>
+@endsection
